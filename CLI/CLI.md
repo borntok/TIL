@@ -43,6 +43,20 @@ $ git commit -m 'first commit'
 
 
 
+## 프로젝트 초기화 진행
+
+프로젝트 폴더 생성
+
+```
+mkdir new_project
+```
+
+README 파일 & gitignore 생성
+
+```
+$ touch README.md .gitignore 생성
+```
+
 초기화 시점에 1회 입력
 
 ```
@@ -52,7 +66,7 @@ $ git init
 작업하며 계속 입력
 
 ```
-$ git add <filename>
+$ git add .
 $ git commit -m 'MESSAGE'
 ```
 
@@ -63,12 +77,22 @@ $ git status  # 현재 상황
 $ git log     # commit 로그 
 ```
 
+원격 저장소 생성 @github.com
+
 원격 저장소(remote repo) 등록하기
+
 ```
 $ git remote add origin <URL>
 ```
 
+등록된 저장소 확인
+
+```
+$ git remote -v
+```
+
 원격 저장소에 PUSH 하기
+
 ```
 $ git push origin master
 ```
