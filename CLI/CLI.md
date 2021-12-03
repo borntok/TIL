@@ -97,12 +97,50 @@ $ git remote -v
 $ git push origin master
 ```
 
-- 새로운 컴퓨터에서 기존 원격 저장소 복제하기
+새로운 컴퓨터에서 기존 원격 저장소 복제하기
+
 ```
 $ git clone <URL>
+
 ```
 
-- 원격 저장소의 내용 받아오기
+원격 저장소에 PULL하기
+
 ```
 $ git pull origin master
 ```
+
+# git 02
+
+1. ```
+   $ git add .
+   ```
+
+2. ```
+   $ git commit -m '메세지'
+   ```
+
+3. ```
+   $ git push origin master
+   ```
+
+   1.잘 된다 => 8번으로 
+
+   2.안된다 => 4번으로
+
+   ```
+   ```
+
+   
+
+4. ```
+   $ git pull origin master
+   ```
+
+   1. 자동 병합(auto merge)이 일어난다.
+
+       - ```
+         $ git status 에 아무런 알림이 없다.
+         ```
+
+5. 
