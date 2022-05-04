@@ -1,15 +1,16 @@
+@import "./abstracts/mixin_common";
 @import "./abstracts/variables_color";
 @import "./abstracts/variables";
-@import "./abstracts/mixin_common";
 
 @import "./base/reset";
 @import "./base/preset";
 
-@import "./components/order_type";
 @import "./components/header_area";
-@import "./components/order_info_area";
-@import "./components/recent_order_area";
 @import "./components/menu_category_area";
 @import "./components/menu_list_area";
+@import "./components/menu_item";
+@import "./components/order_type";
+@import "./components/order_info_area";
+@import "./components/recent_order_area";
 
 @import "./pages/order_pages";
