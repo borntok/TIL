@@ -494,8 +494,75 @@ textarea::-webkit-outer-spin-button {
   overflow: hidden;
 }
 
+.menu-category-area {
+  position: sticky;
+  top: 94px;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.menu-category-area .common-inner {
+  position: relative;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.menu-category-area .common-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 100%;
+  background-image: linear-gradient(to right, #fff 35%, rgba(255, 255, 255, 0));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.menu-category-area .common-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 35%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.menu-category-area .category-list {
+  display: flex;
+  align-items: center;
+  height: 54px;
+}
+
+.menu-category-area .category-item:first-child {
+  padding-left: 18px;
+}
+
+.menu-category-area .category-item:last-child {
+  padding-right: 18px;
+}
+
+.menu-category-area .category-tab {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 15px;
+  color: #333;
+}
+
+.menu-category-area .category-tab.is-active {
+  background-color: #424242;
+  font-weight: 700;
+  color: #fff;
+}
+
 .container {
   padding-top: 94px;
+  background-color: #f4f7f9;
 }
 
 .common-inner {
