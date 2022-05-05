@@ -29,6 +29,7 @@
 
   .recent-menu-item {
     box-sizing: content-box;
+    position: relative;
     padding-left: 16px;
     width: 80px;
     text-align: center;
@@ -72,8 +73,8 @@
 
   .badge-cart {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 50px;
+    right: 16px;
     display: flex;
     padding: 6px;
     border: 1px solid $booking-color-border150;
