@@ -648,15 +648,6 @@ textarea::-webkit-outer-spin-button {
   color: #fff;
 }
 
-.menu-review-area .orderer-img-area {
-  padding-bottom: 22px;
-  background-color: #fff;
-}
-
-.menu-review-area .orderer-img-area .title {
-  padding: 6px 18px 12px;
-}
-
 .menu-review-area .title {
   line-height: 22px;
   font-size: 17px;
@@ -668,6 +659,15 @@ textarea::-webkit-outer-spin-button {
 .menu-review-area .title .num {
   margin-left: 6px;
   color: #01d760;
+}
+
+.menu-review-area .orderer-img-area {
+  padding-bottom: 22px;
+  background-color: #fff;
+}
+
+.menu-review-area .orderer-img-area .title {
+  padding: 6px 18px 12px;
 }
 
 .menu-review-area .orderer-pic-list {
@@ -702,6 +702,99 @@ textarea::-webkit-outer-spin-button {
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+.menu-review-area .orderer-review-area {
+  margin-top: 12px;
+  background-color: #fff;
+}
+
+.menu-review-area .orderer-review-area .title {
+  padding: 16px 18px;
+}
+
+.menu-review-area .review-list {
+  border-top: 1px solid #f2f4f6;
+}
+
+.menu-review-area .review-item {
+  padding: 16px 18px;
+  border-bottom: 1px solid #f2f4f6;
+}
+
+.menu-review-area .review-star {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #242424;
+  transform: translateY(-2px);
+}
+
+.menu-review-area .ico-star-group {
+  position: relative;
+  margin-right: 6px;
+  display: inline-block;
+  width: 77px;
+  height: 13px;
+  background: url("../images/ico-star-group.svg") no-repeat center left;
+}
+
+.menu-review-area .ico-star-group-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: url("../images/ico-star-group-fill.svg") no-repeat center left;
+}
+
+.menu-review-area .review-text {
+  margin-top: 4px;
+  line-height: 24px;
+  font-size: 15px;
+  color: #333;
+}
+
+.menu-review-area .review-info {
+  display: flex;
+  margin-top: 8px;
+  font-size: 13px;
+  letter-spacing: -0.3px;
+  color: #8f8f8f;
+}
+
+.menu-review-area .review-date::before {
+  content: '';
+  display: inline-block;
+  margin: 0 4px;
+  width: 2px;
+  height: 2px;
+  background-color: #e1e5e7;
+  vertical-align: middle;
+}
+
+.menu-review-area .btn-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #424242;
+}
+
+.menu-review-area .btn-more::after {
+  content: '';
+  margin-left: 6px;
+  margin-bottom: 6px;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  transform: rotate(135deg);
 }
 
 .go-to-top {
