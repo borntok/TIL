@@ -1874,6 +1874,91 @@ body.scroll-off {
   color: #242424;
 }
 
+.order-content-extra .place-map-area {
+  margin-top: 2px;
+  padding-bottom: 0;
+}
+
+.order-content-extra .place-map-area .map-area {
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: #fafbfc;
+  overflow: hidden;
+}
+
+.order-content-extra .place-map-area .place-address-box {
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.order-content-extra .place-map-area .place-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #242424;
+}
+
+.order-content-extra .place-map-area .place-address {
+  margin-top: 4px;
+  color: #666;
+}
+
+.order-content-extra .place-map-area .place-address-detail {
+  margin-top: 8px;
+  color: #006f49;
+}
+
+.order-content-extra .place-map-area .img-map {
+  display: block;
+  width: 100%;
+  border-top: 1px solid #e9eef0;
+}
+
+.order-content-extra .place-map-area .map-location {
+  position: relative;
+}
+
+.order-content-extra .place-map-area .map-location .btn-expand {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+
+.order-content-extra .place-map-area .map-location .ico-expand {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.order-content-extra .place-map-area .map-location .ico-expand::before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  top: 3px;
+  left: -9px;
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.order-content-extra .place-map-area .map-location .ico-expand::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  top: -9px;
+  right: -10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 .order-form-area .page-title-area {
   height: 105px;
   background-image: linear-gradient(264deg, #3accff, #2cec88);
