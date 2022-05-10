@@ -1,0 +1,89 @@
+.order-content-extra {
+  .orderer-info-area,
+  .place-map-area,
+  .agreement-area {
+    padding: 0 $m-padding 30px;
+    background-color: #fff;
+  }
+
+  .title {
+    padding-top: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    color: $booking-color-text2;
+  }
+
+  .orderer-info-area {
+    .info-item {
+      margin-top: 20px;
+    }
+
+    .info-title {
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      color: $booking-color-text2;
+
+      &::before {
+        content: '';
+        margin-right: 8px;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background-color: #d5dadd;
+      }
+    }
+
+    .option-group {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      height: 45px;
+      .option-item {
+        flex: 1;
+      }
+    }
+
+    .input-radio {
+      position: absolute;
+      &:checked {
+        & + .input-radio-button {
+          border-color:$green ;
+          background-color: $green;
+          font-weight: 700;
+          color: #fff;
+        }
+      }
+    }
+
+    .input-radio-button {
+      display: block;
+      line-height: 45px;
+      border: 1px solid $booking-color-border110;
+      background-color: $booking-color-bg3;
+      font-size: 15px;
+      color: $booking-color-text5;
+      text-align: center;
+
+      &.need {
+        border-radius: 5px 0 0 5px;
+      }
+      &.no-need {
+        border-radius: 0 5px 5px 0;
+        border-left: 0;
+      }
+    }
+
+    .input-text {
+      display: block;
+      margin-top: 10px;
+      padding: 0 12px;
+      width: 100%;
+      height: 45px;
+      border: 1px solid $booking-color-border112;
+      background-color: $booking-color-bg2;
+      font-size: 15px;
+      color: $booking-color-text2;
+    }
+  }
+}
