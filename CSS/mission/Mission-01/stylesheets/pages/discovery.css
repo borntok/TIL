@@ -1,0 +1,115 @@
+/* 오늘의 발견 */
+
+.container {
+  justify-content: center;
+  width: 1020px;
+  margin: auto;
+}
+
+/* header */
+
+.header-inner {
+  height: 40px;
+  margin: 100px 0 48px;
+}
+
+.header-logo {
+  width: 176px;
+  height: 40px;
+}
+
+/* main */
+.today-discovery-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 8px 0 24px 0;
+}
+
+.today-discovery-title > h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.today-discovery-title > h3 {
+  padding: 0 10px;
+  text-align: center;
+  color: var(--color-gray-600);
+}
+
+.today-discovery-title > h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-gray-600);
+}
+
+
+.today-discovery-list > li {
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  border: 1px solid var(--color-gray-600);
+  margin-bottom:16px;
+}
+
+.add-margin-left {
+  margin-left: 16px;
+}
+
+.item-wide {
+  width: 502px;
+  padding: 20px 28px;
+}
+
+.item-narrow {
+  width: 243px;
+  padding: 14px 22px 14px 21px;
+}
+
+.btn-buy {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 20px;
+  bottom: 20px;
+  background-color: var(--color-black);
+  opacity: 0.2;
+  border: none;
+}
+
+.today-discovery-list > li:hover, 
+.today-discovery-list > li:focus-within {
+  border: 1px solid var(--color-blue-600);
+}
+
+.today-discovery-list > li:hover .btn-buy, 
+.today-discovery-list > li:focus-within .btn-buy {
+  position: absolute;
+  background-color: var(--color-blue-600);
+  opacity: 1;
+  border: none;
+}
+
+.today-discovery-list > li:hover .btn-buy::before, 
+.today-discovery-list > li:focus-within .btn-buy::before {
+  position: absolute;
+  content: '구매하기';
+  width: 90px;
+  line-height: 40px;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  background-color: var(--color-blue-600);
+}
+
+.today-discovery-list > li:hover .btn-buy::after, 
+.today-discovery-list > li:focus-within .btn-buy::after{
+  position: absolute;
+  content: url("/assets/icon/angle-right-square.svg");
+  width: 39px;
+  height: 40px;
+  line-height: 40px;
+  left: 71px;
+  bottom: 0;
+  background-color: var(--color-blue-600);
+}
