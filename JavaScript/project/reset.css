@@ -2,49 +2,49 @@
   font-family: 'notosans';
   font-weight: 100;
   font-style: swap;
-  src: url("/utils/font/noto-thin.woff2") format("woff2"), url("/utils/font/noto-thin.woff") format("woff"), url("/utils/font/noto-thin.otf") format("opentype");
+  src: url("./font/noto-thin.woff2") format("woff2"), url("./font/noto-thin.woff") format("woff"), url("./font/noto-thin.otf") format("opentype");
 }
 
 @font-face {
   font-family: 'notosans';
   font-weight: 300;
   font-style: swap;
-  src: url("/utils/font/noto-light.woff2") format("woff2"), url("/utils/font/noto-light.woff") format("woff"), url("/utils/font/noto-light.otf") format("opentype");
+  src: url("./font/noto-light.woff2") format("woff2"), url("./font/noto-light.woff") format("woff"), url("./font/noto-light.otf") format("opentype");
 }
 
 @font-face {
   font-family: 'notosans';
   font-weight: 350;
   font-style: swap;
-  src: url("/utils/font/noto-demi.woff2") format("woff2"), url("/utils/font/noto-demi.woff") format("woff"), url("/utils/font/noto-demi.otf") format("opentype");
+  src: url("./font/noto-demi.woff2") format("woff2"), url("./font/noto-demi.woff") format("woff"), url("./font/noto-demi.otf") format("opentype");
 }
 
 @font-face {
   font-family: 'notosans';
   font-weight: 400;
   font-style: swap;
-  src: url("/utils/font/noto-regular.woff2") format("woff2"), url("/utils/font/noto-regular.woff") format("woff"), url("/utils/font/noto-regular.otf") format("opentype");
+  src: url("./font/noto-regular.woff2") format("woff2"), url("./font/noto-regular.woff") format("woff"), url("./font/noto-regular.otf") format("opentype");
 }
 
 @font-face {
   font-family: 'notosans';
   font-weight: 500;
   font-style: swap;
-  src: url("/utils/font/noto-medi.woff2") format("woff2"), url("/utils/font/noto-medi.woff") format("woff"), url("/utils/font/noto-medi.otf") format("opentype");
+  src: url("./font/noto-medi.woff2") format("woff2"), url("./font/noto-medi.woff") format("woff"), url("./font/noto-medi.otf") format("opentype");
 }
 
 @font-face {
   font-family: 'notosans';
   font-weight: 700;
   font-style: swap;
-  src: url("/utils/font/noto-bold.woff2") format("woff2"), url("/utils/font/noto-bold.woff") format("woff"), url("/utils/font/noto-bold.otf") format("opentype");
+  src: url("./font/noto-bold.woff2") format("woff2"), url("./font/noto-bold.woff") format("woff"), url("./font/noto-bold.otf") format("opentype");
 }
 
 @font-face {
   font-family: 'notosans';
   font-weight: 900;
   font-style: swap;
-  src: url("/utils/font/noto-black.woff2") format("woff2"), url("/utils/font/noto-black.woff") format("woff"), url("/utils/font/noto-black.otf") format("opentype");
+  src: url("./font/noto-black.woff2") format("woff2"), url("./font/noto-black.woff") format("woff"), url("./font/noto-black.otf") format("opentype");
 }
 
 body {
