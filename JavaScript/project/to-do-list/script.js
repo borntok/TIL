@@ -13,8 +13,9 @@
   const API_URL = 'http://localhost:3000/todos'
   
   const createTodoElement = (item) => {
-    const { id, content, completed } = item
+    const { id, content, completed, recommended } = item
     const isChecked = completed ? 'checked' : ''
+    const isRecommended = recommended ? 'active' : ''
     const $todoItem = document.createElement('div')
     $todoItem.classList.add('item')
     $todoItem.dataset.id = id
@@ -25,10 +26,14 @@
                 class='todo_checkbox'
                 ${isChecked} 
               />
-              <label>${content}</label>
+              <label class="title">${content}</label>
               <input type="text" value="${content}" />
             </div>
             <div class="item_buttons content_buttons">
+              <button class="todo_recommend_button ${isRecommended}">
+                <i class="far fa-star"></i>
+                <i class="fas fa-star"></i>
+              </button>
               <button class="todo_edit_button">
                 <i class="far fa-edit"></i>
               </button>
@@ -95,13 +100,30 @@
     fetch(`${API_URL}/${id}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-type': 'application/json',
       },
       body: JSON.stringify({completed}),
     })
       .then((response) => response.json())
       .then(getTodos)
       .catch((error) => console.error(error))
+  }
+
+  const recommendTodo = (e) => {
+    if (!e.target.classList.contains('todo_recommend_button')) return
+    const $item = e.target.closest('.item')
+    const id = $item.dataset.id
+    const recommended = !e.target.classList.contains('active')
+    fetch(`${API_URL}/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ recommended }),
+    })
+      .then((response) => response.json())
+      .then(getTodos)
+      .catch((error) => console.error(error.message))
   }
 
   const changeEditMode = (e) => {
@@ -112,7 +134,10 @@
     const $editButtons = $item.querySelector('.edit_buttons')
     const value = $editInput.value
 
-    if (e.target.className === 'todo_edit_button') {
+    if (
+      e.target.className === 'todo_edit_button' ||
+      e.target.className === 'title'
+      ) {
       $label.style.display = 'none'
       $editInput.style.display = 'block'
       $contentButtons.style.display = 'none'
@@ -122,7 +147,10 @@
       $editInput.value = value
     }
 
-    if (e.target.className === 'todo_edit_cancel_button') {
+    if (
+      e.target.className === 'todo_edit_cancel_button' ||
+      e.keyCode === 27
+      ) {
       $label.style.display = 'block'
       $editInput.style.display = 'none'
       $contentButtons.style.display = 'block'
@@ -132,21 +160,25 @@
   }
 
   const editTodo = (e) => {
-    if (e.target.className !== 'todo_edit_confirm_button') return
-    const $item = e.target.closest('.item')
-    const id = $item.dataset.id
-    const $editInput = $item.querySelector('input[type="text"]')
-    const content =   $editInput.value
-
-    fetch(`${API_URL}/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({content})
-    })
-      .then(getTodos)
-      .catch((error) => console.error(error))
+    if (
+      e.target.className === 'todo_edit_confirm_button' ||
+      e.keyCode === 13
+      ) {
+        const $item = e.target.closest('.item')
+        const id = $item.dataset.id
+        const $editInput = $item.querySelector('input[type="text"]')
+        const content =   $editInput.value
+    
+        fetch(`${API_URL}/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({content})
+        })
+          .then(getTodos)
+          .catch((error) => console.error(error))    
+      }
   }
 
   const removeTodo = (e) => {
@@ -222,8 +254,11 @@
     $form.addEventListener('submit', addTodo)
     $todos.addEventListener('click', toggleTodo)
     $todos.addEventListener('click', changeEditMode)
+    $todos.addEventListener('keydown', changeEditMode)
     $todos.addEventListener('click', editTodo)
+    $todos.addEventListener('keydown', editTodo)
     $todos.addEventListener('click', removeTodo)
+    $todos.addEventListener('click', recommendTodo)
   }
   init()
 })()
