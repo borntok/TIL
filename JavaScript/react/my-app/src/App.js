@@ -1,18 +1,10 @@
 import "./App.css";
-import Header from "./components/Header";
-import Welcome from "./components/Welcom";
+import Counter from "./components/Counter";
 
 function App() {
-  const info = {
-    firstName: "riri ",
-    lastName: "bad gyal",
-    withImg: true,
-  };
-
   return (
     <div className="App">
-      <Header title={"Learn React"} />
-      <Welcome {...info} />
+      <Counter />
     </div>
   );
 }
