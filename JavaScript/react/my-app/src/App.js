@@ -1,7 +1,7 @@
-import Calculator from "./components/Calculator";
+import Clock from "./components/Clock";
 
 function App() {
-  return <Calculator />;
+  return <Clock />;
 }
 
 export default App;
