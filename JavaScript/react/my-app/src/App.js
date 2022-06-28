@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Banners from "./components/Banners";
+import Toggle from "./components/Toggle";
 
 function App() {
-  return <Banners />;
+  return <Toggle />;
 }
 
 export default App;
