@@ -12,7 +12,7 @@ function App() {
       const names = pickedCards.reduce((acc, cur) => {
         return (acc = acc.concat(`${cur.name}, `));
       }, "");
-      alert(`당첨자는 ${names} 입니다.`);
+      return alert(`당첨자는 ${names} 입니다.`);
     }
 
     // 추첨하기 버튼을 누르면, 랜덤하게 하나의 명함을 선택
@@ -29,12 +29,17 @@ function App() {
     setCards(datas);
   }, []);
 
+  const result = pickedCards.map((pickedCard) => (
+    <BusinessCard info={pickedCard} />
+  ));
+
   return (
     <div>
       {cards.length > 0 && <button onClick={draw}>추첨하기</button>}
-      {pickedCards.length > 0 && (
+      {/* {pickedCards.length > 0 && (
         <BusinessCard info={pickedCards[pickedCards.length - 1]} />
-      )}
+      )} */}
+      {pickedCards.length > 0 && result}
     </div>
   );
 }
