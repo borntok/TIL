@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import SimpleForm from "./components/SimpleForm";
+import UnControlledForm from "./components/UnControlledForm";
 
 function App() {
-  return <SimpleForm />;
+  return <UnControlledForm />;
 }
 
 export default App;
