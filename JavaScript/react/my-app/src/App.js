@@ -1,8 +1,8 @@
 import React from "react";
-import CatParent from "./components/CatParent";
+import ToDoList from "./components/ToDoList";
 
 function App() {
-  return <CatParent />;
+  return <ToDoList />;
 }
 
 export default App;
