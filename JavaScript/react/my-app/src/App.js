@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import UnControlledForm from "./components/UnControlledForm";
+import React from "react";
+import CatParent from "./components/CatParent";
 
 function App() {
-  return <UnControlledForm />;
+  return <CatParent />;
 }
 
 export default App;
