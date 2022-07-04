@@ -1,8 +1,8 @@
 import React from "react";
-import ToDoList from "./components/ToDoList";
+import OnlineStore from "./components/OnlineStore";
 
 function App() {
-  return <ToDoList />;
+  return <OnlineStore />;
 }
 
 export default App;
