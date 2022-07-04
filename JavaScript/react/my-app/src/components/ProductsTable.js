@@ -8,12 +8,12 @@ export default function ProductsTable(props) {
 
   return (
     <>
-      <tr>
+      <tr style={{ fontWeight: "bold" }}>
         <td>{category}</td>
       </tr>
       {filteredItems.map((item, idx) => (
         <tr key={idx}>
-          <td>{item.name}</td>
+          <td style={{ color: item.stocked ? "black" : "red" }}>{item.name}</td>
           <td>{item.price}</td>
         </tr>
       ))}
