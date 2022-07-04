@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import StoreTable from "./StoreTable";
 
 export default function OnlineStore() {
+  const [filter, setFilter] = useState({ text: "", inStockOnly: false });
+
+  function updateFilter(key, value) {
+    setFilter({
+      ...filter,
+      [key]: value,
+    });
+  }
+
   const datas = [
     {
       category: "Sporting Goods",
@@ -44,8 +53,8 @@ export default function OnlineStore() {
 
   return (
     <div>
-      <SearchBar />
-      <StoreTable products={datas} />
+      <SearchBar filter={filter} updateFilter={updateFilter} />
+      <StoreTable products={datas} filter={filter} />
     </div>
   );
 }

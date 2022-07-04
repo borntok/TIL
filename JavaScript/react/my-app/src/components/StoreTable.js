@@ -2,9 +2,12 @@ import React from "react";
 import ProductsTable from "./ProductsTable";
 
 export default function StoreTable(props) {
-  const { products } = props;
+  const { products, filter } = props;
 
-  const result = products.reduce((acc, cur) => {
+  const targetProduct = products.filter((p) => p.name.includes(filter.text));
+  const filteredProducts = targetProduct.length > 0 ? targetProduct : products;
+
+  const result = filteredProducts.reduce((acc, cur) => {
     if (acc.hasOwnProperty(cur.category)) {
       // key(category) 가지고 있는 케이스. 배열에 추가만 하면됨
       return {
@@ -32,7 +35,12 @@ export default function StoreTable(props) {
       </thead>
       <tbody>
         {keys.map((key, idx) => (
-          <ProductsTable category={key} items={result[key]} key={idx} />
+          <ProductsTable
+            category={key}
+            items={result[key]}
+            key={idx}
+            inStockOnly={filter.inStockOnly}
+          />
         ))}
       </tbody>
     </table>
