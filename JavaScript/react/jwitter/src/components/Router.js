@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
@@ -18,7 +18,6 @@ export default function AppRouter(props) {
         ) : (
           <>
             <Route path={"/"} element={<Auth />} />
-            <Route path={"*"} element={<Navigate to="/" />} />
           </>
         )}
       </Routes>
