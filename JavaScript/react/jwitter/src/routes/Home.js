@@ -1,15 +1,31 @@
-import React, { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { dbService } from "fbase";
 
 export default function Home() {
   const [jweet, setJweet] = useState("");
+  const [jweets, setJweets] = useState([]);
+
+  const getJweets = async () => {
+    const dbNweets = await getDocs(collection(dbService, "jweets"));
+    dbNweets.forEach((document) => {
+      const jweetObject = {
+        ...document.data(),
+        id: document.id,
+      };
+      setJweets((prev) => [jweetObject, ...prev]);
+    });
+  };
+
+  useEffect(() => {
+    getJweets();
+  }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     await addDoc(collection(dbService, "jweets"), {
-      jweet,
       createAt: Date.now(),
+      jweet,
     });
     setJweet("");
   };
@@ -20,6 +36,8 @@ export default function Home() {
     } = event;
     setJweet(value);
   };
+
+  console.log(jweets);
 
   return (
     <div>
@@ -33,6 +51,13 @@ export default function Home() {
         />
         <input type="submit" value="Jweet" />
       </form>
+      <div>
+        {jweets.map((jweet) => (
+          <div key={jweet.id}>
+            <h4>{jweet.jweet}</h4>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
