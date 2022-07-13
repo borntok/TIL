@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import { dbService } from "fbase";
 
-export default function Home() {
+export default function Home(props) {
   const [jweet, setJweet] = useState("");
   const [jweets, setJweets] = useState([]);
 
-  const getJweets = async () => {
-    const dbNweets = await getDocs(collection(dbService, "jweets"));
-    dbNweets.forEach((document) => {
-      const jweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setJweets((prev) => [jweetObject, ...prev]);
-    });
-  };
-
   useEffect(() => {
-    getJweets();
+    onSnapshot(collection(dbService, "jweets"), (snapshot) => {
+      const jweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setJweets(jweetArray);
+    });
   }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     await addDoc(collection(dbService, "jweets"), {
+      text: jweet,
       createAt: Date.now(),
-      jweet,
+      creatorId: props.userObj.uid,
     });
     setJweet("");
   };
@@ -54,7 +50,7 @@ export default function Home() {
       <div>
         {jweets.map((jweet) => (
           <div key={jweet.id}>
-            <h4>{jweet.jweet}</h4>
+            <h4>{jweet.text}</h4>
           </div>
         ))}
       </div>
