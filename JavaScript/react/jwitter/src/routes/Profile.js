@@ -6,7 +6,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const onLogOutClick = () => {
     authService.signOut();
-    navigate("/");
+    navigate("/", { replace: true });
   };
   return (
     <>
