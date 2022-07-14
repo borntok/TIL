@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import { dbService } from "fbase";
+import Jweet from "components/Jweet";
 
 export default function Home(props) {
   const [jweet, setJweet] = useState("");
@@ -49,9 +50,11 @@ export default function Home(props) {
       </form>
       <div>
         {jweets.map((jweet) => (
-          <div key={jweet.id}>
-            <h4>{jweet.text}</h4>
-          </div>
+          <Jweet
+            key={jweet.id}
+            jweetObj={jweet}
+            isOwner={jweet.creatorId === props.userObj.uid}
+          />
         ))}
       </div>
     </div>
