@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import { dbService, storageService } from "fbase";
-import { ref, uploadString } from "firebase/storage";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import Jweet from "components/Jweet";
 
 export default function Home(props) {
   const [jweet, setJweet] = useState("");
   const [jweets, setJweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
     onSnapshot(collection(dbService, "jweets"), (snapshot) => {
@@ -22,15 +22,28 @@ export default function Home(props) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const fileRef = ref(storageService, `${props.userObj.uid}/${uuidv4()}`);
-    const response = await uploadString(fileRef, attachment, "data_url");
-    console.log(response);
-    // await addDoc(collection(dbService, "jweets"), {
-    //   text: jweet,
-    //   createAt: Date.now(),
-    //   creatorId: props.userObj.uid,
-    // });
-    // setJweet("");
+    let attachmentUrl = "";
+    if (attachment !== "") {
+      const attachmentRef = ref(
+        storageService,
+        `${props.userObj.uid}/${uuidv4()}`
+      );
+      const response = await uploadString(
+        attachmentRef,
+        attachment,
+        "data_url"
+      );
+      attachmentUrl = await getDownloadURL(response.ref);
+    }
+    const jweetObj = {
+      text: jweet,
+      createAt: Date.now(),
+      creatorId: props.userObj.uid,
+      attachmentUrl,
+    };
+    await addDoc(collection(dbService, "jweets"), jweetObj);
+    setJweet("");
+    setAttachment("");
   };
 
   const onChange = (event) => {
