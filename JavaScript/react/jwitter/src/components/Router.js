@@ -13,7 +13,10 @@ export default function AppRouter(props) {
         {props.isLoggedIn ? (
           <>
             <Route path={"/"} element={<Home userObj={props.userObj} />} />
-            <Route path={"/profile"} element={<Profile />} />
+            <Route
+              path={"/profile"}
+              element={<Profile userObj={props.userObj} />}
+            />
           </>
         ) : (
           <>
