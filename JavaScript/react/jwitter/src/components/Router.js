@@ -8,14 +8,19 @@ import Navigation from "components/Navigation";
 export default function AppRouter(props) {
   return (
     <BrowserRouter>
-      {props.isLoggedIn && <Navigation />}
+      {props.isLoggedIn && <Navigation userObj={props.userObj} />}
       <Routes>
         {props.isLoggedIn ? (
           <>
             <Route path={"/"} element={<Home userObj={props.userObj} />} />
             <Route
               path={"/profile"}
-              element={<Profile userObj={props.userObj} />}
+              element={
+                <Profile
+                  userObj={props.userObj}
+                  refreshUser={props.refreshUser}
+                />
+              }
             />
           </>
         ) : (
