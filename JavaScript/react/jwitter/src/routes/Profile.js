@@ -40,7 +40,9 @@ export default function Profile(props) {
   const onSubmit = async (event) => {
     event.preventDefault();
     if (props.userObj.displayName !== newDisplayName) {
-      await updateProfile(props.userObj, { displayName: newDisplayName });
+      await updateProfile(authService.currentUser, {
+        displayName: newDisplayName,
+      });
     }
     props.refreshUser();
   };

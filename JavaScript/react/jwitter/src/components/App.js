@@ -26,15 +26,16 @@ function App() {
           uid: user.uid,
           updateProfile: (args) => updateProfile(user, args),
         });
+      } else {
+        setUserObj(null);
       }
-      // user ? setUserObj(user) : setUserObj(null);
       setInit(true);
     });
   }, []);
 
   const refreshUser = () => {
-    updateCurrentUser(authService, authService.currentUser);
-    setUserObj(authService.currentUser);
+    const user = authService.currentUser;
+    setUserObj({ ...user });
   };
 
   return (
