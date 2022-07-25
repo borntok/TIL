@@ -5,6 +5,7 @@ import BlogPage from "./blog/BlogPage";
 import JavascriptPage from "./blog/JavascriptPage";
 import ReactPage from "./blog/ReactPage";
 import ReactDocPage from "./blog/ReactDocPage";
+import UserStore from "./store/user";
 
 function App() {
   // root url : main page component
@@ -12,17 +13,19 @@ function App() {
   // blog url : blog page component
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<MainPage />} />
-        <Route path={"tech"} element={<TechPage />}>
-          <Route path={"javascript"} element={<JavascriptPage />} />
-          <Route path={"react"} element={<ReactPage />} />
-          <Route path={"react/:docId"} element={<ReactDocPage />} />
-        </Route>
-        <Route path={"blog"} element={<BlogPage />} />
-      </Routes>
-    </BrowserRouter>
+    <UserStore>
+      <BrowserRouter>
+        <Routes>
+          <Route path={"/"} element={<MainPage />} />
+          <Route path={"tech"} element={<TechPage />}>
+            <Route path={"javascript"} element={<JavascriptPage />} />
+            <Route path={"react"} element={<ReactPage />} />
+            <Route path={"react/:docId"} element={<ReactDocPage />} />
+          </Route>
+          <Route path={"blog"} element={<BlogPage />} />
+        </Routes>
+      </BrowserRouter>
+    </UserStore>
   );
 }
 
