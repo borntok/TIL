@@ -1,31 +1,45 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainPage from "./blog/MainPage";
-import TechPage from "./blog/TechPage";
-import BlogPage from "./blog/BlogPage";
-import JavascriptPage from "./blog/JavascriptPage";
-import ReactPage from "./blog/ReactPage";
-import ReactDocPage from "./blog/ReactDocPage";
-import UserStore from "./store/user";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUser } from "../src/modules/account/api";
+import {
+  fetchUserRequest,
+  fetchUserSuccess,
+  fetchUserFailure,
+  fetchUserThunk,
+} from "./modules/account/account";
 
 function App() {
-  // root url : main page component
-  // tech url : tech page component
-  // blog url : blog page component
+  const account = useSelector((state) => state.account);
+  const { loading, name, email } = account;
+  const dispatch = useDispatch();
+
+  // const handleClick = async () => {
+  //   dispatch(fetchUserRequest());
+  //   try {
+  //     const res = await fetchUser();
+  //     dispatch(fetchUserSuccess({ name: res.name, email: res.email }));
+  //   } catch {
+  //     dispatch(fetchUserFailure());
+  //   }
+  // };
+
+  const handleClick = () => {
+    dispatch(fetchUserThunk());
+  };
+
+  console.log(account);
 
   return (
-    <UserStore>
-      <BrowserRouter>
-        <Routes>
-          <Route path={"/"} element={<MainPage />} />
-          <Route path={"tech"} element={<TechPage />}>
-            <Route path={"javascript"} element={<JavascriptPage />} />
-            <Route path={"react"} element={<ReactPage />} />
-            <Route path={"react/:docId"} element={<ReactDocPage />} />
-          </Route>
-          <Route path={"blog"} element={<BlogPage />} />
-        </Routes>
-      </BrowserRouter>
-    </UserStore>
+    <div className="App">
+      <button onClick={handleClick}>User 정보 가져오기</button>
+      {loading ? (
+        <p>loading...</p>
+      ) : name && email ? (
+        <>
+          <p>이름 : {name}</p>
+          <p>이메일 : {email}</p>
+        </>
+      ) : null}
+    </div>
   );
 }
 

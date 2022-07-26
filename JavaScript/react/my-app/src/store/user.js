@@ -19,7 +19,7 @@ export default function UserStore(props) {
   console.log(user);
 
   return (
-    <UserContext.Provider value={dispatch}>
+    <UserContext.Provider value={{ user, dispatch }}>
       {props.children}
     </UserContext.Provider>
   );
