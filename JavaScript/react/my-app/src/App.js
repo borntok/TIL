@@ -1,45 +1,17 @@
-import { useSelector, useDispatch } from "react-redux";
-import { fetchUser } from "../src/modules/account/api";
-import {
-  fetchUserRequest,
-  fetchUserSuccess,
-  fetchUserFailure,
-  fetchUserThunk,
-} from "./modules/account/account";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Edit from "./pages/Edit";
 
 function App() {
-  const account = useSelector((state) => state.account);
-  const { loading, name, email } = account;
-  const dispatch = useDispatch();
-
-  // const handleClick = async () => {
-  //   dispatch(fetchUserRequest());
-  //   try {
-  //     const res = await fetchUser();
-  //     dispatch(fetchUserSuccess({ name: res.name, email: res.email }));
-  //   } catch {
-  //     dispatch(fetchUserFailure());
-  //   }
-  // };
-
-  const handleClick = () => {
-    dispatch(fetchUserThunk());
-  };
-
-  console.log(account);
-
   return (
-    <div className="App">
-      <button onClick={handleClick}>User 정보 가져오기</button>
-      {loading ? (
-        <p>loading...</p>
-      ) : name && email ? (
-        <>
-          <p>이름 : {name}</p>
-          <p>이메일 : {email}</p>
-        </>
-      ) : null}
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/edit" element={<Edit />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
