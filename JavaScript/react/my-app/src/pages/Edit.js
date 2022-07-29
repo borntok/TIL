@@ -8,7 +8,9 @@ import { getUser, updateNickname } from "../mocks/api";
 export default function Edit() {
   const [inputValue, setInputValue] = useState("");
   const queryClient = useQueryClient();
-  const { data, isLoading } = useQuery(["@getUser"], getUser);
+  const { data, isLoading } = useQuery(["@getUser"], getUser, {
+    staleTime: Infinity,
+  });
   const mutation = useMutation(updateNickname, {
     onSuccess: () => {
       queryClient.invalidateQueries(["@getUser"]);
