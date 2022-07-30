@@ -1,57 +1,26 @@
-import React, { useState, useCallback } from "react";
-import Info from "./components/Info";
 import "./styles.css";
+import React, { useState } from "react";
 
-const App = () => {
-  const [color, setColor] = useState("");
-  const [movie, setMovie] = useState("");
-
-  const onChangeHandler = useCallback((e) => {
-    if (e.target.id === "color") setColor(e.target.value);
-    else setMovie(e.target.value);
-  }, []);
+export default function Parent() {
+  const [number, setNumber] = useState(1);
+  const age = 1;
 
   return (
     <div className="App">
-      <div>
-        <label>
-          <div>What is your favorite color of rainbow ?</div>
-          <input id="color" value={color} onChange={onChangeHandler} />
-        </label>
-      </div>
-      <div>
-        <div>What is your favorite movie among these ?</div>
-        <label>
-          <input
-            type="radio"
-            name="movie"
-            value="Marriage Story"
-            onChange={onChangeHandler}
-          />
-          Marriage Story
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="movie"
-            value="The Fast And The Furious"
-            onChange={onChangeHandler}
-          />
-          The Fast And The Furious
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="movie"
-            value="Avengers"
-            onChange={onChangeHandler}
-          />
-          Avengers
-        </label>
-      </div>
-      <Info color={color} movie={movie} />
+      <button
+        onClick={() => {
+          setNumber(number + 1);
+        }}
+      >
+        Click
+      </button>
+      <Child age={age} />
     </div>
   );
-};
+}
 
-export default App;
+const Child = React.memo((props) => {
+  console.log("Child component");
+  console.log(props.age);
+  return <div>Child</div>;
+});
