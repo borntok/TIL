@@ -7,3 +7,7 @@ export const getUser = () => {
 export const updateNickname = (nickname) => {
   return axios.put(`/update-nickname?nickname=${nickname}`);
 };
+
+export const getPosts = () => {
+  return axios.get("/posts").then((res) => res.data);
+};
