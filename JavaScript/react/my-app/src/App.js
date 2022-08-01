@@ -1,26 +1,24 @@
-import "./styles.css";
-import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Edit from "./pages/Edit";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { Suspense } from "react";
 
-export default function Parent() {
-  const [number, setNumber] = useState(1);
-  const age = 1;
+const queryClient = new QueryClient();
 
+function App() {
   return (
-    <div className="App">
-      <button
-        onClick={() => {
-          setNumber(number + 1);
-        }}
-      >
-        Click
-      </button>
-      <Child age={age} />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Suspense fallback={<span>Loading...</span>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/edit" element={<Edit />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
-const Child = React.memo((props) => {
-  console.log("Child component");
-  console.log(props.age);
-  return <div>Child</div>;
-});
+export default App;

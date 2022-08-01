@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import {
-  useQuery,
-  useQueries,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import React, { useState, lazy, Suspense } from "react";
+import { useQueries, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getUser, updateNickname, getPosts } from "../mocks/api";
+
+const Post = lazy(() => import("./Post"));
 
 // api를 통해 현재 닉네임값 가져오기
 // handleSubmit: 업데이트된 inputValue를 서버에 전송
@@ -65,7 +62,7 @@ export default function Edit() {
       </form>
       <ul>
         {posts?.map((post) => (
-          <li key={post.title}>{post.title}</li>
+          <Post title={post.title} />
         ))}
       </ul>
     </>
