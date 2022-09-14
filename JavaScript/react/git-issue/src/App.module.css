@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+.nav {
+  padding: 16px 32px;
+  background: #24292f;
+  display: flex;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  align-items: center;
+}
+
+.header {
+  padding: 16px 32px;
+  background: rgb(246, 248, 250);
+  height: 96px;
+  box-shadow: inset 0 -1px 0 hsla(210, 18%, 87%, 1);
+}
+
+.listContainer {
+  margin-top: 24px;
+  padding: 0 32px;
+  height: 220px;
+}
+
+.footer {
+  margin-top: 40px;
+  padding: 40px 16px 8px;
+  border-top: 1px solid #d0d7de;  
+}
