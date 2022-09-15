@@ -26,14 +26,7 @@ export default function ListContainer() {
       </div>
       <OpenClosedFilters />
       <ListItemLayout className={styles.listFilter}>
-        <div className={styles.filterLists}>
-          <span>Author</span>
-          <span>Label</span>
-          <span>Projects</span>
-          <span>Milestones</span>
-          <span>Assignee</span>
-          <span>Sort</span>
-        </div>
+        <ListFilter />
       </ListItemLayout>
       <div className={styles.container}>
         <ListItem
@@ -46,6 +39,27 @@ export default function ListContainer() {
         />
       </div>
     </div>
+  )
+}
+
+function ListFilter() {
+  return (
+    <div className={styles.filterLists}>
+      <ListFilterItem>Author</ListFilterItem>
+      <ListFilterItem>Label</ListFilterItem>
+      <ListFilterItem>Projects</ListFilterItem>
+      <ListFilterItem>Milestones</ListFilterItem>
+      <ListFilterItem>Assignee</ListFilterItem>
+      <ListFilterItem>Sort</ListFilterItem>
+    </div>
+  )
+}
+
+function ListFilterItem({ onClick, children }) {
+  return (
+    <span role="button" onClick={onClick}>
+      {children} ▾
+    </span>
   )
 }
 
