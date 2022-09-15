@@ -19,3 +19,21 @@
   margin-right: auto;
   box-shadow: none;
 }
+
+.listFilter {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background: rgb(246, 248, 250);
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.filterLists {
+  display: flex;
+  align-items: center;
+}
+
+.filterLists > span {
+  padding: 0 16px;
+  line-height: 21px;
+}
