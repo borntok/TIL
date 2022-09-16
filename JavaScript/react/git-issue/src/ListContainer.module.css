@@ -29,6 +29,11 @@
   margin-top: 20px;
 }
 
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .filterLists {
   display: flex;
   align-items: center;
