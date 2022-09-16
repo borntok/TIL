@@ -16,6 +16,7 @@ export default function Pagination({
       </button>
       {new Array(maxPage).fill(null).map((_, i) => (
         <PageButton
+          key={i + 1}
           number={i + 1}
           onClick={onClickPageButton}
           selected={i + 1 === currentPage}
