@@ -1,7 +1,8 @@
 import styles from "./ListContainer.module.css"
+import axios from "axios"
 import cx from "clsx"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import Button from "./components/Button"
 import OpenClosedFilters from "./components/OpenClosedFilters"
@@ -14,6 +15,19 @@ export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
   const [list, setList] = useState([])
   const [page, setPage] = useState(1)
+  const [checked, setChecked] = useState(false)
+
+  async function getData() {
+    const { data } = await axios.get(
+      `https://api.github.com/repos/facebook/react/issues`,
+    )
+    setList(data)
+    console.log(data)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <>
@@ -43,15 +57,12 @@ export default function ListContainer() {
           />
         </ListItemLayout>
         <div className={styles.container}>
-          {list.map((listItem, idx) => (
+          {list.map((item) => (
             <ListItem
-              key={idx}
-              badges={[
-                {
-                  color: "red",
-                  title: "Bug",
-                },
-              ]}
+              key={item.id}
+              data={item}
+              checked={checked}
+              onClickCheckBox={() => setChecked((checked) => !checked)}
             />
           ))}
         </div>
