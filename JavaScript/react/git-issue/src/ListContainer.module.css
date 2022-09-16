@@ -21,15 +21,6 @@
   box-shadow: none;
 }
 
-.textFilter {
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.selected {
-  font-weight: 800;
-}
-
 .listFilter {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
@@ -43,13 +34,32 @@
   align-items: center;
 }
 
-.filterLists > span { 
+.filterLists > div > span { 
   padding: 0 16px;
   line-height: 21px;
   cursor: pointer;
   color: #57606a
 }
 
-.filterLists > span:hover {
+.filterLists > div > span:hover {
   color: #000
+}
+
+.textFilter {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.selected {
+  font-weight: 800;
+}
+
+.modalContainer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.filterItem {
+  position: relative;
 }
