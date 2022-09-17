@@ -17,17 +17,20 @@ export default function ListContainer() {
   const [page, setPage] = useState(1)
   const [checked, setChecked] = useState(false)
 
-  async function getData() {
+  const maxPage = 10
+
+  async function getData(pageParam) {
     const { data } = await axios.get(
       `https://api.github.com/repos/facebook/react/issues`,
+      { params: { page: pageParam } },
     )
     setList(data)
     console.log(data)
   }
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData(page)
+  }, [page])
 
   return (
     <>
@@ -69,9 +72,9 @@ export default function ListContainer() {
       </div>
       <div className={styles.paginationContainer}>
         <Pagination
-          maxPage={10}
           currentPage={page}
           onClickPageButton={(number) => setPage(number)}
+          maxPage={maxPage}
         />
       </div>
     </>
