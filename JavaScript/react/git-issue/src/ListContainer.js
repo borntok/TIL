@@ -16,21 +16,22 @@ export default function ListContainer() {
   const [list, setList] = useState([])
   const [page, setPage] = useState(1)
   const [checked, setChecked] = useState(false)
+  const [isOpenMode, setIsOpenMode] = useState(true)
 
   const maxPage = 10
 
-  async function getData(pageParam) {
+  async function getData(params) {
     const { data } = await axios.get(
       `https://api.github.com/repos/facebook/react/issues`,
-      { params: { page: pageParam } },
+      { params },
     )
     setList(data)
     console.log(data)
   }
 
   useEffect(() => {
-    getData(page)
-  }, [page])
+    getData({ page, state: isOpenMode ? "open" : "closed" })
+  }, [page, isOpenMode])
 
   return (
     <>
@@ -51,7 +52,10 @@ export default function ListContainer() {
             New Issue
           </Button>
         </div>
-        <OpenClosedFilters />
+        <OpenClosedFilters
+          isOpenMode={isOpenMode}
+          onClickMode={setIsOpenMode}
+        />
         <ListItemLayout className={styles.listFilter}>
           <ListFilter
             onChangeFilter={(filteredData) => {
