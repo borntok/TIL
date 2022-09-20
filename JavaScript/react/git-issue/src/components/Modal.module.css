@@ -56,3 +56,8 @@
 .item:last-child {
   border-bottom: none;
 }
+
+.list {
+  overflow: auto;
+  max-height: 400px;
+}

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import Modal from "./Modal"
 import { GITHUB_API } from "../api"
 
-export default function ListFilter() {
+export default function ListFilter({ onChangeFilter }) {
   const [showModal, setShowModal] = useState()
   const [list, setList] = useState([])
   const filterList = ["Label", "Milestone", "Assignee"]
@@ -53,6 +53,7 @@ export default function ListFilter() {
             onClick={() => setShowModal(filter)}
             onClose={() => setShowModal()}
             showModal={showModal === filter}
+            onChangeFilter={onChangeFilter}
           >
             {filter}
           </ListFilterItem>
@@ -89,8 +90,8 @@ function ListFilterItem({
           onClose={onClose}
           placeholder={placeholder}
           searchDataList={list}
-          onClickCell={() => {
-            //클릭된 정보를 통해 리스트 필터링
+          onClickCell={(params) => {
+            onChangeFilter(params)
           }}
         />
       </div>
