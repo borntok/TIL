@@ -18,12 +18,11 @@ export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
   const [list, setList] = useState([])
   const [checked, setChecked] = useState(false)
-  const [params, setParams] = useState()
   const maxPage = 10
 
   const [searchParams, setSearchParams] = useSearchParams()
-  const page = parseInt(searchParams.get("page"), 10)
-  const mode = searchParams.get("mode")
+  const page = parseInt(searchParams.get("page") ?? 1, 10)
+  const state = searchParams.get("state")
 
   async function getData(params) {
     const { data } = await axios.get(
@@ -34,8 +33,8 @@ export default function ListContainer() {
   }
 
   useEffect(() => {
-    getData({ page, state: mode, ...params })
-  }, [page, mode, params])
+    getData(searchParams)
+  }, [searchParams])
 
   return (
     <>
@@ -57,13 +56,13 @@ export default function ListContainer() {
           </Button>
         </div>
         <OpenClosedFilters
-          isOpenMode={mode !== "closed"}
-          onClickMode={(mode) => setSearchParams({ mode })}
+          isOpenMode={state !== "closed"}
+          onClickMode={(state) => setSearchParams({ state })}
         />
         <ListItemLayout className={styles.listFilter}>
           <ListFilter
             onChangeFilter={(params) => {
-              setParams(params)
+              setSearchParams(params)
             }}
           />
         </ListItemLayout>
@@ -81,7 +80,9 @@ export default function ListContainer() {
       <div className={styles.paginationContainer}>
         <Pagination
           currentPage={page}
-          onClickPageButton={(number) => setSearchParams({ page: number })}
+          onClickPageButton={(pageNumber) =>
+            setSearchParams({ page: pageNumber })
+          }
           maxPage={maxPage}
         />
       </div>
