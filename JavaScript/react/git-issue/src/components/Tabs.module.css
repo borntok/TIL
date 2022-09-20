@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .tab {
   display: flex;
   border: none;
