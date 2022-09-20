@@ -1,18 +1,47 @@
 import styles from "./ListFilter.module.css"
+import axios from "axios"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Modal from "./Modal"
+import { GITHUB_API } from "../api"
 
 export default function ListFilter() {
   const [showModal, setShowModal] = useState()
-  const filterList = [
-    "Author",
-    "Label",
-    "Projects",
-    "Milestones",
-    "Assignee",
-    "Sort",
-  ]
+  const [list, setList] = useState([])
+  const filterList = ["Label", "Milestone", "Assignee"]
+
+  async function getData(apiPath) {
+    const data = await axios.get(
+      `${GITHUB_API}/repos/facebook/react/${apiPath}`,
+    )
+
+    let result = []
+    switch (apiPath) {
+      case "assignees":
+        result = data.data.map((d) => ({
+          name: d.login,
+        }))
+        break
+      case "milestones":
+        result = data.data.map((d) => ({
+          name: d.title,
+        }))
+        break
+      case "labels":
+      default:
+        result = data.data
+    }
+    console.log({ result })
+
+    setList(result)
+  }
+
+  useEffect(() => {
+    if (showModal) {
+      const apiPath = `${showModal.toLowerCase()}s`
+      getData(apiPath)
+    }
+  }, [showModal])
 
   return (
     <>
@@ -20,7 +49,7 @@ export default function ListFilter() {
         {filterList.map((filter) => (
           <ListFilterItem
             key={filter}
-            searchDataList={[]}
+            searchDataList={list}
             onClick={() => setShowModal(filter)}
             onClose={() => setShowModal()}
             showModal={showModal === filter}
@@ -42,6 +71,12 @@ function ListFilterItem({
   onClose,
   onChangeFilter,
 }) {
+  const [list, setList] = useState(searchDataList)
+
+  useEffect(() => {
+    setList(searchDataList)
+  }, [searchDataList])
+
   return (
     <div className={styles.filterItem}>
       <span role="button" onClick={onClick}>
@@ -53,7 +88,7 @@ function ListFilterItem({
           opened={showModal}
           onClose={onClose}
           placeholder={placeholder}
-          searchDataList={[]}
+          searchDataList={list}
           onClickCell={() => {
             //클릭된 정보를 통해 리스트 필터링
           }}

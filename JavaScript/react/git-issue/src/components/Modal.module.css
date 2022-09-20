@@ -43,3 +43,16 @@
   padding: 5px 12px;
   line-height: 20px;
 }
+
+.item {
+  padding: 7px 16px;
+  border-bottom: 1px solid #d0d7de;
+  line-height: 1.25;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.item:last-child {
+  border-bottom: none;
+}

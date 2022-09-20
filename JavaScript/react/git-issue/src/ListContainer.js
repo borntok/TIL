@@ -11,6 +11,8 @@ import ListFilter from "./components/ListFilter"
 import ListItem from "./components/ListItem"
 import Pagination from "./components/Pagination"
 
+import { GITHUB_API } from "./api"
+
 export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
   const [list, setList] = useState([])
@@ -22,16 +24,16 @@ export default function ListContainer() {
 
   async function getData(params) {
     const { data } = await axios.get(
-      `https://api.github.com/repos/facebook/react/issues`,
+      `${GITHUB_API}/repos/facebook/react/issues`,
       { params },
     )
     setList(data)
-    console.log(data)
   }
 
   useEffect(() => {
     getData({ page, state: isOpenMode ? "open" : "closed" })
   }, [page, isOpenMode])
+  // console.log(data)
 
   return (
     <>
