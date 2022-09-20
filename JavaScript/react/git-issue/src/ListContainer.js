@@ -18,12 +18,12 @@ export default function ListContainer() {
   const [inputValue, setInputValue] = useState("is:pr is:open")
   const [list, setList] = useState([])
   const [checked, setChecked] = useState(false)
-  const [isOpenMode, setIsOpenMode] = useState(true)
   const [params, setParams] = useState()
   const maxPage = 10
 
   const [searchParams, setSearchParams] = useSearchParams()
   const page = parseInt(searchParams.get("page"), 10)
+  const mode = searchParams.get("mode")
 
   async function getData(params) {
     const { data } = await axios.get(
@@ -34,9 +34,8 @@ export default function ListContainer() {
   }
 
   useEffect(() => {
-    getData({ page, state: isOpenMode ? "open" : "closed", ...params })
-  }, [page, isOpenMode, params])
-  // console.log(data)
+    getData({ page, state: mode, ...params })
+  }, [page, mode, params])
 
   return (
     <>
@@ -58,8 +57,8 @@ export default function ListContainer() {
           </Button>
         </div>
         <OpenClosedFilters
-          isOpenMode={isOpenMode}
-          onClickMode={setIsOpenMode}
+          isOpenMode={mode !== "closed"}
+          onClickMode={(mode) => setSearchParams({ mode })}
         />
         <ListItemLayout className={styles.listFilter}>
           <ListFilter

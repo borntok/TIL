@@ -8,13 +8,13 @@ export default function OpenClosedFilters({ isOpenMode, onClickMode }) {
         // size={openModeDataSize}
         state="Open"
         selected={isOpenMode}
-        onClick={() => onClickMode(true)}
+        onClick={() => onClickMode("open")}
       />
       <OpenClosedFilter
         // size={closeModeDataSize}
         state="Closed"
         selected={!isOpenMode}
-        onClick={() => onClickMode(false)}
+        onClick={() => onClickMode("closed")}
       />
     </>
   )
