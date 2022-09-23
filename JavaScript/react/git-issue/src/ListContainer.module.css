@@ -20,6 +20,10 @@
   box-shadow: none;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .listFilter {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
