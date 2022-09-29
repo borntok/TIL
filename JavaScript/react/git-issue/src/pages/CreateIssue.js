@@ -1,10 +1,12 @@
 import styles from "./CreateIssue.module.css"
 import cx from "clsx"
+import axios from "axios"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import Button from "../components/Button"
 import TextField from "../components/TextField"
 import { useForm } from "../hooks"
+import { GITHUB_API } from "../api"
 
 export default function CreateIssue() {
   const inputRef = useRef()
@@ -12,7 +14,24 @@ export default function CreateIssue() {
   const { inputValues, onChange, handleSubmit, errors, isSubmitting } = useForm(
     {
       initialValues: { title: "", body: "" },
-      onSubmit: () => console.log("제출 완료"),
+      onSubmit: async () =>
+        await axios
+          .post(
+            `${GITHUB_API}/repos/borntok/wanted-pre-onboarding-fe/issues`,
+            inputValues,
+            {
+              headers: {
+                Authorization: process.env.REACT_APP_GITHUB_TOKEN,
+                "Content-Type": "applications/json",
+              },
+            },
+          )
+          .then(function (response) {
+            console.log(response)
+          })
+          .catch(function (error) {
+            console.log(error)
+          }),
       validate,
       refs: { title: inputRef, body: textareaRef },
     },
