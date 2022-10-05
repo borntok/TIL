@@ -1,12 +1,12 @@
-import "./TodoInput.css";
+import styles from "./TodoInput.module.css";
 import { RiChatNewLine } from "react-icons/ri";
 
 export default function TodoInput() {
   return (
-    <section className="container">
-      <form className="formContainer">
-        <input className="input" />
-        <button className="enter">
+    <section className={styles.container}>
+      <form className={styles.formContainer}>
+        <input className={styles.input} />
+        <button className={styles.enter}>
           <RiChatNewLine />
         </button>
       </form>
