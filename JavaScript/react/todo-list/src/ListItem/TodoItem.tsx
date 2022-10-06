@@ -3,21 +3,24 @@ import { BsCheckCircle } from "react-icons/bs";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 
 interface TodoItemProps {
-  todo: string;
+  text: string;
+  isChecked: boolean;
 }
 
 export default function TodoItem(props: TodoItemProps) {
-  const isCheck = false;
-
   return (
     <li className={styles.container}>
       <BsCheckCircle
         className={[
           styles.checkIcon,
-          `${isCheck ? styles.checkedCircleIcon : styles.unCheckedCircleIcon}`,
+          `${
+            props.isChecked
+              ? styles.checkedCircleIcon
+              : styles.unCheckedCircleIcon
+          }`,
         ].join(" ")}
       />
-      <span>{props.todo}</span>
+      <span>{props.text}</span>
       <IoIosRemoveCircleOutline className={styles.removeIcon} />
     </li>
   );

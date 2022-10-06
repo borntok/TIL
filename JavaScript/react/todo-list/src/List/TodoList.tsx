@@ -1,14 +1,23 @@
+import { TodoType } from "../App";
 import TodoItem from "../ListItem/TodoItem";
 import styles from "./TodoList.module.css";
 
-export default function TodoList() {
-  const todoList = ["React", "Typescript", "Javascript", "CSS", "HTML"];
+interface TodoListProps {
+  todos: TodoType[];
+}
 
+export default function TodoList(props: TodoListProps) {
   return (
     <section>
       <ol className={styles.olContainer}>
-        {todoList.map((item, idx) => {
-          return <TodoItem key={`${item}_${idx}`} todo={item} />;
+        {props.todos.map((todo) => {
+          return (
+            <TodoItem
+              key={todo.id}
+              text={todo.text}
+              isChecked={todo.isChecked}
+            />
+          );
         })}
       </ol>
     </section>

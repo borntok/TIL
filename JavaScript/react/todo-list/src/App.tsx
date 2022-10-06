@@ -1,18 +1,42 @@
+import { type } from "@testing-library/user-event/dist/type";
+import { useState } from "react";
 import "./App.css";
+
 import Divider from "./Divider/Divider";
 import TodoHeader from "./Header/TodoHeader";
 import TodoInput from "./Input/TodoInput";
 import TodoList from "./List/TodoList";
 import TodoListTools from "./Tools/TodoListTools";
 
+export type TodoType = {
+  id: number;
+  text: string;
+  isChecked: boolean;
+};
+
 function App() {
+  const [text, setText] = useState("");
+  const [todos, setTodos] = useState<TodoType[]>([]);
+
+  function handleTextChange(text: string) {
+    setText(text);
+  }
+
+  function handleSubmit() {
+    console.log("submit");
+  }
+
   return (
     <main className="App">
       <TodoHeader />
-      <TodoInput />
+      <TodoInput
+        text={text}
+        onTextChange={handleTextChange}
+        onSubmit={handleSubmit}
+      />
       <TodoListTools />
       <Divider />
-      <TodoList />
+      <TodoList todos={todos} />
     </main>
   );
 }
