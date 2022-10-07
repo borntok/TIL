@@ -29,6 +29,11 @@
   color: #c0c0c0;
 }
 
+.lineThrow {
+  text-decoration: line-through;
+  color: #c0c0c0;
+}
+
 .removeIcon {
   font-size: 28px;
   margin-left: auto;
