@@ -24,7 +24,7 @@ export default function TodoInput(props: TodoInputProps) {
         <input
           className={styles.input}
           placeholder="해야할 Todo"
-          defaultValue={props.text}
+          value={props.text || ""}
           onChange={handleInputChange}
         />
         <button className={styles.enter} type="submit">
