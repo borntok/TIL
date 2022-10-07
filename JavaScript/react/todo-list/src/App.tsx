@@ -6,6 +6,7 @@ import Divider from "./Divider/Divider";
 import TodoHeader from "./Header/TodoHeader";
 import TodoInput from "./Input/TodoInput";
 import TodoList from "./List/TodoList";
+import TodoListArea from "./List/TodoListArea";
 import TodoListTools from "./Tools/TodoListTools";
 
 export type TodoType = {
@@ -34,9 +35,11 @@ function App() {
         onTextChange={handleTextChange}
         onSubmit={handleSubmit}
       />
-      <TodoListTools />
-      <Divider />
-      <TodoList todos={todos} />
+      <TodoListArea todoCount={todos.length}>
+        <TodoListTools />
+        <Divider />
+        <TodoList todos={todos} />
+      </TodoListArea>
     </main>
   );
 }
