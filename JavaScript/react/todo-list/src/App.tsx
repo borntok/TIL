@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import { useState } from "react";
 import "./App.css";
 
@@ -36,7 +35,7 @@ function App() {
 
   return (
     <main className="App">
-      <TodoHeader />
+      <TodoHeader count={todos.filter((todo) => !todo.isChecked).length} />
       <TodoInput
         text={text}
         onTextChange={handleTextChange}
