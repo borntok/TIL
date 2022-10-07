@@ -53,6 +53,27 @@ function App() {
     setTodos(newTodos);
   }
 
+  function isTodoAllChecked() {
+    return todos.every((todo) => todo.isChecked);
+  }
+
+  function handleToggleAllClick() {
+    const isAllChecked = isTodoAllChecked();
+
+    const newTodos = todos.map((todo) => {
+      return {
+        ...todo,
+        isChecked: !isAllChecked,
+      };
+    });
+
+    setTodos(newTodos);
+  }
+
+  function handleRemoveAllClick() {
+    setTodos([]);
+  }
+
   return (
     <main className="App">
       <TodoHeader count={todos.filter((todo) => !todo.isChecked).length} />
@@ -62,7 +83,11 @@ function App() {
         onSubmit={handleSubmit}
       />
       <TodoListArea todoCount={todos.length}>
-        <TodoListTools />
+        <TodoListTools
+          isAllChecked={isTodoAllChecked()}
+          onToggleAllClick={handleToggleAllClick}
+          onRemoveAllClick={handleRemoveAllClick}
+        />
         <Divider />
         <TodoList
           todos={todos}
