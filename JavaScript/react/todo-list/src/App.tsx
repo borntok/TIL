@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import "./App.css";
 
 import Divider from "./Divider/Divider";
@@ -6,83 +6,86 @@ import TodoHeader from "./Header/TodoHeader";
 import TodoInput from "./Input/TodoInput";
 import TodoList from "./List/TodoList";
 import TodoListArea from "./List/TodoListArea";
+import { todoInputReducer } from "./Todo/todoInputReducer";
+import { todoReducer } from "./Todo/todoReducer";
 import TodoListTools from "./Tools/TodoListTools";
 
-export type TodoType = {
-  id: number;
-  text: string;
-  isChecked: boolean;
-};
-
 function App() {
-  const [text, setText] = useState("");
-  const [todos, setTodos] = useState<TodoType[]>([]);
+  const [inputState, inputDispatch] = useReducer(todoInputReducer, {
+    text: "",
+  });
+  const [todoState, todoDispatch] = useReducer(todoReducer, { todos: [] });
 
   function handleTextChange(text: string) {
-    setText(text);
+    inputDispatch({
+      type: "change",
+      payload: text,
+    });
   }
 
   function handleSubmit() {
-    const newTodos = todos.concat({
-      id: Date.now(),
-      text: text,
-      isChecked: false,
+    if (!inputState.text) return;
+
+    todoDispatch({
+      type: "add",
+      payload: {
+        text: inputState.text,
+      },
     });
 
-    setTodos(newTodos);
-    setText("");
+    inputDispatch({
+      type: "clear",
+    });
   }
 
   function handleToggle(id: number) {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, isChecked: !todo.isChecked };
-      }
-
-      return todo;
+    todoDispatch({
+      type: "checked",
+      payload: {
+        id: id,
+      },
     });
-
-    setTodos(newTodos);
   }
 
   function handleRemove(id: number) {
-    const newTodos = todos.filter((todo) => {
-      return todo.id !== id;
+    todoDispatch({
+      type: "remove",
+      payload: {
+        id: id,
+      },
     });
-
-    setTodos(newTodos);
   }
 
   function isTodoAllChecked() {
-    return todos.every((todo) => todo.isChecked);
+    return todoState.todos.every((todo) => todo.isChecked);
   }
 
   function handleToggleAllClick() {
     const isAllChecked = isTodoAllChecked();
 
-    const newTodos = todos.map((todo) => {
-      return {
-        ...todo,
-        isChecked: !isAllChecked,
-      };
+    todoDispatch({
+      type: "allChecked",
+      payload: !isAllChecked,
     });
-
-    setTodos(newTodos);
   }
 
   function handleRemoveAllClick() {
-    setTodos([]);
+    todoDispatch({
+      type: "allRemove",
+    });
   }
 
   return (
     <main className="App">
-      <TodoHeader count={todos.filter((todo) => !todo.isChecked).length} />
+      <TodoHeader
+        count={todoState.todos.filter((todo) => !todo.isChecked).length}
+      />
       <TodoInput
-        text={text}
+        text={inputState.text}
         onTextChange={handleTextChange}
         onSubmit={handleSubmit}
       />
-      <TodoListArea todoCount={todos.length}>
+      <TodoListArea todoCount={todoState.todos.length}>
         <TodoListTools
           isAllChecked={isTodoAllChecked()}
           onToggleAllClick={handleToggleAllClick}
@@ -90,7 +93,7 @@ function App() {
         />
         <Divider />
         <TodoList
-          todos={todos}
+          todos={todoState.todos}
           onToggleClick={handleToggle}
           onRemoveClick={handleRemove}
         />
