@@ -1,8 +1,8 @@
-type todoInputStateType = {
+export type TodoInputStateType = {
   text: string;
 };
 
-type todoInputActionType =
+export type TodoInputActionType =
   | {
       type: "change";
       payload: string;
@@ -12,8 +12,8 @@ type todoInputActionType =
     };
 
 export function todoInputReducer(
-  state: todoInputStateType,
-  action: todoInputActionType
+  state: TodoInputStateType,
+  action: TodoInputActionType
 ) {
   switch (action.type) {
     case "change":
