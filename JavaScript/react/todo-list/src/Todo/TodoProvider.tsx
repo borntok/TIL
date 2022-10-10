@@ -15,6 +15,7 @@ import {
   todoReducer,
   TodoStateType,
 } from "../Todo/todoReducer";
+import { loadTodos } from "./todoStorage";
 
 interface TodoProviderprops {
   children: ReactNode;
@@ -29,7 +30,9 @@ const InputTodoDispatchContext =
   createContext<Dispatch<TodoInputActionType> | null>(null);
 
 export default function TodoProvider(props: TodoProviderprops) {
-  const [todoState, todoDispatch] = useReducer(todoReducer, { todos: [] });
+  const [todoState, todoDispatch] = useReducer(todoReducer, {
+    todos: loadTodos(),
+  });
   const [inputState, inputDispatch] = useReducer(todoInputReducer, {
     text: "",
   });
