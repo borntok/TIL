@@ -1,4 +1,4 @@
-const HASH_SIZE = 37; // 해쉬테이블은 한정된 자원을 활용하여 속도를 최적화하는 방법
+const HASH_SIZE = 1013; // 해쉬테이블은 한정된 자원을 활용하여 속도를 최적화하는 방법
 
 // Element(): key, value 저장을 위한 생성자
 function Element(key, value) {
@@ -14,9 +14,10 @@ function HashTable() {
 
 // hashCode(): 해쉬함수
 HashTable.prototype.hashCode = function (key) {
-  let hash = 0;
+  /** djd2 hash function */
+  let hash = 5381; //seed
   for (let i = 0; i < key.length; i++) {
-    hash += key.charCodeAt(i);
+    hash = hash * 33 + key.charCodeAt(i);
   }
   return hash % HASH_SIZE;
 };
