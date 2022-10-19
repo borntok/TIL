@@ -31,7 +31,7 @@ LinkedList.prototype.printNode = function () {
 // append(): 연결 리스트 가장 끝에 노드 추가
 LinkedList.prototype.append = function (value) {
   let node = new Node(value);
-  current = this.head;
+  let current = this.head;
 
   if (this.head === null) {
     this.head = node;
