@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 
 export default function PageHeader() {
   return (
     <Header>
-      <Title>Pokémon</Title>
+      <Title>
+        <Link to="/">Pokémon</Link>
+      </Title>
       <Select>
         <option value="Official">Official</option>
         <option value="A">A</option>
