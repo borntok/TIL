@@ -6,17 +6,21 @@ import PokeNameChip from "../Common/PokeNameChip";
 const TempImgUrl =
   "https://mblogthumb-phinf.pstatic.net/MjAxNzAyMjJfMTg3/MDAxNDg3NzI4NTQ2NjYz.PXKT8WOvIrVgUamJQqSIGdwjeUHlO6GKKQBJrcHejLsg.EgM4jWM1lZh3NGoC2BUgXQ2aFzqQnSCh8ivhMmT7wWUg.PNG.ioea65ztem/02.%EA%B5%AC%EA%B8%80.png?type=w800";
 
-export default function PokeCard() {
+interface PokeCardProps {
+  name: string;
+}
+
+export default function PokeCard(props: PokeCardProps) {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(`/pokemon/이상해씨`);
+    navigate(`/pokemon/${props.name}`);
   }
 
   return (
     <Item onClick={handleClick}>
       <Header>
-        <PokeNameChip />
+        <PokeNameChip name={props.name} />
       </Header>
       <Body>
         <Image src={TempImgUrl} alt="이상해씨" />
