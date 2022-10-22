@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PokeMarkChip from "../Common/PokeMarkChip";
 import PokeNameChip from "../Common/PokeNameChip";
-
-const TempImgUrl =
-  "https://mblogthumb-phinf.pstatic.net/MjAxNzAyMjJfMTg3/MDAxNDg3NzI4NTQ2NjYz.PXKT8WOvIrVgUamJQqSIGdwjeUHlO6GKKQBJrcHejLsg.EgM4jWM1lZh3NGoC2BUgXQ2aFzqQnSCh8ivhMmT7wWUg.PNG.ioea65ztem/02.%EA%B5%AC%EA%B8%80.png?type=w800";
+import {
+  fetchPokemonDetail,
+  PokemonDetailType,
+} from "../Service/pokemonService";
 
 interface PokeCardProps {
   name: string;
@@ -13,17 +15,30 @@ interface PokeCardProps {
 export default function PokeCard(props: PokeCardProps) {
   const navigate = useNavigate();
 
+  const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
+
   function handleClick() {
     navigate(`/pokemon/${props.name}`);
+  }
+
+  useEffect(() => {
+    (async () => {
+      const detail = await fetchPokemonDetail(props.name);
+      setPokemon(detail);
+    })();
+  }, [props.name]);
+
+  if (!pokemon) {
+    return null; // TODO: 화면이 로딩중일 때 표시
   }
 
   return (
     <Item onClick={handleClick}>
       <Header>
-        <PokeNameChip name={props.name} />
+        <PokeNameChip name={pokemon.name} id={pokemon.id} />
       </Header>
       <Body>
-        <Image src={TempImgUrl} alt="이상해씨" />
+        <Image src={pokemon.images.dreamWorldFront} alt={pokemon.name} />
       </Body>
       <Footer>
         <PokeMarkChip />

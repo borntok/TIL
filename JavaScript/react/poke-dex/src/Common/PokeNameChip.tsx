@@ -2,13 +2,30 @@ import styled from "@emotion/styled";
 
 interface PokeNameChipProps {
   name: string;
+  id: number;
 }
 
 export default function PokeNameChip(props: PokeNameChipProps) {
+  function renderNumber(id: number) {
+    const disits = 3;
+    const numberString = id.toString();
+
+    if (numberString.length >= disits) {
+      return numberString;
+    }
+
+    let result = "";
+    for (let i = 0; i < disits - numberString.length; i++) {
+      result += "0";
+    }
+
+    return result + numberString;
+  }
+
   return (
     <Chip>
       <NumberChip>
-        <Number>001</Number>
+        <Number>{renderNumber(props.id)}</Number>
       </NumberChip>
       <Text>{props.name}</Text>
     </Chip>

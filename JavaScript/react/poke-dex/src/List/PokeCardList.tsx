@@ -18,7 +18,7 @@ export default function PokeCardList() {
       const pokemons = await fetchPokemons();
       setPokemons(pokemons);
     })();
-  });
+  }, []);
 
   return (
     <List>
