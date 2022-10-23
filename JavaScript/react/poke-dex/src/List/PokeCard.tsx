@@ -35,7 +35,11 @@ export default function PokeCard(props: PokeCardProps) {
   return (
     <Item onClick={handleClick}>
       <Header>
-        <PokeNameChip name={pokemon.name} id={pokemon.id} />
+        <PokeNameChip
+          name={pokemon.koreanName}
+          color={pokemon.color}
+          id={pokemon.id}
+        />
       </Header>
       <Body>
         <Image src={pokemon.images.dreamWorldFront} alt={pokemon.name} />

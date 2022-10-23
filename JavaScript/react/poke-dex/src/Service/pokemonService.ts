@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const remote = axios.create();
-const defaultURL = "https://pokeapi.co/api/v2/pokemon/";
 
 export interface PokemonListResponseType {
   count: number;
@@ -13,6 +12,7 @@ export interface PokemonListResponseType {
 }
 
 export async function fetchPokemons() {
+  const defaultURL = "https://pokeapi.co/api/v2/pokemon/";
   const response = await remote.get<PokemonListResponseType>(defaultURL);
   return response.data;
 }
@@ -46,11 +46,25 @@ interface PokemonDetailResponseType {
   }[];
 }
 
+interface PokemonSpeciesResponseType {
+  color: {
+    name: string;
+  };
+  names: {
+    name: string;
+    language: {
+      name: string;
+    };
+  }[];
+}
+
 export interface PokemonDetailType {
   id: number;
   weight: number;
   height: number;
   name: string;
+  koreanName: string;
+  color: string;
   types: string[];
   images: {
     frontDefault: string;
@@ -66,13 +80,24 @@ export interface PokemonDetailType {
 export async function fetchPokemonDetail(
   name: string
 ): Promise<PokemonDetailType> {
+  const pokemonDetailURL = `https://pokeapi.co/api/v2/pokemon/${name}`;
+  const pokemonSpeciesURL = `https://pokeapi.co/api/v2/pokemon-species/${name}`;
+
   const response = await remote.get<PokemonDetailResponseType>(
-    `${defaultURL}${name}`
+    pokemonDetailURL
   );
+  const speciesResponse = await remote.get<PokemonSpeciesResponseType>(
+    pokemonSpeciesURL
+  );
+  console.log(speciesResponse.data);
 
   return {
     id: response.data.id,
     name: response.data.name,
+    koreanName:
+      speciesResponse.data.names.find((item) => item.language.name === "ko")
+        ?.name ?? response.data.name,
+    color: speciesResponse.data.color.name,
     weight: response.data.weight / 10,
     height: response.data.height / 10,
     types: response.data.types.map((item) => item.type.name),
