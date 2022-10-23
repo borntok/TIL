@@ -11,9 +11,9 @@ export interface PokemonListResponseType {
   }[];
 }
 
-export async function fetchPokemons() {
-  const defaultURL = "https://pokeapi.co/api/v2/pokemon/";
-  const response = await remote.get<PokemonListResponseType>(defaultURL);
+export async function fetchPokemons(nextURL?: string) {
+  const requestURL = nextURL ? nextURL : "https://pokeapi.co/api/v2/pokemon/";
+  const response = await remote.get<PokemonListResponseType>(requestURL);
   return response.data;
 }
 
@@ -89,7 +89,6 @@ export async function fetchPokemonDetail(
   const speciesResponse = await remote.get<PokemonSpeciesResponseType>(
     pokemonSpeciesURL
   );
-  console.log(speciesResponse.data);
 
   return {
     id: response.data.id,
