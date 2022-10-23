@@ -33,7 +33,7 @@ export default function PokeCard(props: PokeCardProps) {
   }
 
   return (
-    <Item onClick={handleClick}>
+    <Item onClick={handleClick} color={pokemon.color}>
       <Header>
         <PokeNameChip
           name={pokemon.koreanName}
@@ -51,7 +51,7 @@ export default function PokeCard(props: PokeCardProps) {
   );
 }
 
-const Item = styled.li`
+const Item = styled.li<{ color: string }>`
   display: flex;
   flex-direction: column;
   padding: 8px;
@@ -68,7 +68,7 @@ const Item = styled.li`
   }
 
   &:active {
-    background-color: #caffc1;
+    background-color: ${(props) => props.color};
     opacity: 0.8;
     transition: background-color 0s;
   }
