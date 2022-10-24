@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { isVisible } from "@testing-library/user-event/dist/utils";
 import { useEffect, useState } from "react";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PokeImageSkeleton } from "../Common/PokeImageSkeleton";
 import PokeMarkChip from "../Common/PokeMarkChip";
@@ -10,6 +10,7 @@ import {
   fetchPokemonDetail,
   PokemonDetailType,
 } from "../Service/pokemonService";
+import { RootState } from "../Store";
 
 interface PokeCardProps {
   name: string;
@@ -17,6 +18,7 @@ interface PokeCardProps {
 
 export default function PokeCard(props: PokeCardProps) {
   const navigate = useNavigate();
+  const imageType = useSelector((state: RootState) => state.imageType.type);
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
@@ -62,7 +64,7 @@ export default function PokeCard(props: PokeCardProps) {
         />
       </Header>
       <Body>
-        <Image src={pokemon.images.dreamWorldFront} alt={pokemon.name} />
+        <Image src={pokemon.images[imageType]} alt={pokemon.name} />
       </Body>
       <Footer>
         <PokeMarkChip />
