@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from ".";
 import {
   fetchPokemonDetailAPI,
   PokemonDetailType,
@@ -9,6 +10,13 @@ export const fetchPokemonDetail = createAsyncThunk(
   async (name: string) => {
     const response = await fetchPokemonDetailAPI(name);
     return response;
+  },
+  {
+    condition: (name, { getState }) => {
+      const { pokemonDetail } = getState() as RootState;
+      const pokemon = pokemonDetail.pokemonDetails[name];
+      return !pokemon;
+    },
   }
 );
 
