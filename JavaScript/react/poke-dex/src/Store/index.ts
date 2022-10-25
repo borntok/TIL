@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { imageTypeReducer } from "./ImageTypeSlice";
+import { pokemonsReducer } from "./pokemonsSlice";
 
 export const store = configureStore({
   reducer: {
     imageType: imageTypeReducer,
+    pokemons: pokemonsReducer,
   },
 });
 
