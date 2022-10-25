@@ -1,28 +1,26 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { PokeImageSkeleton } from "../Common/PokeImageSkeleton";
 import PokeMarkChip from "../Common/PokeMarkChip";
-import {
-  fetchPokemonDetail,
-  PokemonDetailType,
-} from "../Service/pokemonService";
-import { RootState } from "../Store";
+import { RootState, useAppDispatch } from "../Store";
+import { fetchPokemonDetail } from "../Store/pokemonDetailSlice";
 
 export default function PokemonDetail() {
   const { name } = useParams();
   const imageType = useSelector((state: RootState) => state.imageType.type);
-  const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
+  const { pokemonDetails } = useSelector(
+    (state: RootState) => state.pokemonDetail
+  );
+  const pokemon = name ? pokemonDetails[name] : null;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!name) return;
 
-    (async () => {
-      const detail = await fetchPokemonDetail(name);
-      setPokemon(detail);
-    })();
-  }, [name]);
+    dispatch(fetchPokemonDetail(name));
+  }, [dispatch, name]);
 
   if (!name || !pokemon) {
     return (
