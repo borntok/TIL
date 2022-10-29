@@ -39,7 +39,7 @@ function OpenClosedFilter({ state, onClick, selected }: OpenClosedFilterProps) {
       className={cx(styles.textFilter, { [styles.selected]: selected })}
       onClick={onClick}
     >
-      {size} {state}
+      {state}
     </span>
   );
 }

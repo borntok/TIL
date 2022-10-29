@@ -1,0 +1,63 @@
+.modal {
+  width: 300px;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+  background: #ffffff;
+  position: absolute;
+  z-index: 99;
+  display: none;
+}
+
+.header {
+  padding: 7px 7px 7px 16px;
+  border-bottom: 1px solid #d0d7de;
+  display: flex;
+  align-items: center;
+}
+
+.header > span {
+  flex: 1;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.header > button {
+  border: none;
+  background: transparent;
+}
+
+.opened {
+  display: block;
+}
+
+.input {
+  padding: 8px;
+}
+
+.input > input {
+  box-shadow: none;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  width: 100%;
+  padding: 5px 12px;
+  line-height: 20px;
+}
+
+.item {
+  padding: 7px 16px;
+  border-bottom: 1px solid #d0d7de;
+  line-height: 1.25;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.list {
+  overflow: auto;
+  max-height: 400px;
+}
