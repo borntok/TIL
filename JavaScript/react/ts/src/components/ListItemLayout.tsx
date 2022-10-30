@@ -2,9 +2,9 @@ import styles from "./ListItemLayout.module.css";
 import cx from "clsx";
 
 interface ListItemLayoutProps {
-  className: string;
-  checked: boolean;
-  onClick: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
+  checked?: boolean;
+  onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children: React.ReactNode;
 }
 
