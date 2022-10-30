@@ -11,7 +11,7 @@ export interface Data {
 
 export type List = Partial<DataItem> & { name: string };
 
-export interface ListItem {
+export interface ListItems {
   id: string;
   labels: BadgeProps[];
   state: "open" | "close";

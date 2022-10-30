@@ -3,15 +3,15 @@ import dayjs from "dayjs";
 
 import ListItemLayout from "./ListItemLayout";
 import Badge from "./Badge";
-import { ListItem } from "../model/issues";
+import { ListItems } from "../model/issues";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 interface ListItemProps {
   checked: boolean;
-  onClickTitle: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  data: ListItem;
+  onClickTitle?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  data: ListItems;
   onClickCheckBox: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
