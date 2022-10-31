@@ -6,9 +6,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-  entry: "./src/index.jsx",
+  entry: "./src/index.tsx",
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   output: {
     path: path.resolve(__dirname, "../build"),
@@ -30,14 +30,14 @@ module.exports = {
       {
         oneOf: [
           {
-            test: /\.(js|jsx)$/,
+            test: /\.(ts|tsx)$/,
             exclude: /node_modules/,
             use: {
               loader: "babel-loader",
             },
           },
           {
-            test: /\.css$/,
+            test: /\.css$/i,
             exclude: /node_modules/,
             use: [
               isProduction ? MiniCssExtractPlugin.loader : "style-loader",
