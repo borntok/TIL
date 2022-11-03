@@ -28,6 +28,14 @@ export default function MapMarker(props: MapMarkerProps) {
       position: props.place.position,
     });
 
+    kakao.maps.event.addListener(marker, "click", function () {
+      map.setCenter(props.place.position);
+      map.setLevel(4, {
+        animate: true,
+      });
+      infoWinodw.setMap(map);
+    });
+
     return marker;
   }, []);
 
