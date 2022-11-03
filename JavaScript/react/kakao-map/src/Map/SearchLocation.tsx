@@ -5,6 +5,7 @@ import { PlaceType } from "./mapTypes";
 
 interface SearchLocationProps {
   onUpdatePlaces: (place: PlaceType[]) => void;
+  onSelect: (placeId: string) => void;
 }
 
 export default function SearchLocation(props: SearchLocationProps) {
@@ -66,6 +67,7 @@ export default function SearchLocation(props: SearchLocationProps) {
   function handleItemClick(place: PlaceType) {
     map.setCenter(place.position);
     map.setLevel(4);
+    props.onSelect(place.id);
   }
 
   return (
