@@ -1,15 +1,13 @@
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
 import { useMap } from "../hooks/useMap";
+import { PlaceType } from "./mapTypes";
 
-interface PlaceType {
-  id: string;
-  position: kakao.maps.LatLng;
-  title: string;
-  address: string;
+interface SearchLocationProps {
+  onUpdatePlaces: (place: PlaceType[]) => void;
 }
 
-export default function SearchLocation() {
+export default function SearchLocation(props: SearchLocationProps) {
   const map = useMap();
   const [keyword, setKeyword] = useState("");
   const [places, setPlaces] = useState<PlaceType[]>([]);
@@ -48,6 +46,7 @@ export default function SearchLocation() {
           };
         });
 
+        props.onUpdatePlaces(placeInfos);
         setPlaces(placeInfos);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert("검색 결과가 존재하지 않습니다.");
@@ -82,7 +81,7 @@ export default function SearchLocation() {
       <List>
         {places.map((item, index) => {
           return (
-            <Item key={item.id} onClick={handleItemClick(item)}>
+            <Item key={item.id} onClick={() => handleItemClick(item)}>
               <label>{`${index + 1}. ${item.title}`}</label>
               <span>{item.address}</span>
             </Item>
