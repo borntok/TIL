@@ -13,7 +13,7 @@ export default function MapMarker(props: MapMarkerProps) {
   const map = useMap();
   const container = useRef(document.createElement("div"));
 
-  const infoWinodw = useMemo(() => {
+  const infoWindow = useMemo(() => {
     container.current.style.position = "absolute";
     container.current.style.bottom = "40px";
 
@@ -33,7 +33,7 @@ export default function MapMarker(props: MapMarkerProps) {
       map.setLevel(4, {
         animate: true,
       });
-      infoWinodw.setMap(map);
+      infoWindow.setMap(map);
     });
 
     return marker;
@@ -49,18 +49,22 @@ export default function MapMarker(props: MapMarkerProps) {
 
   useEffect(() => {
     if (props.showInfo) {
-      infoWinodw.setMap(map);
+      infoWindow.setMap(map);
       return;
     }
 
     return () => {
-      infoWinodw.setMap(null);
+      infoWindow.setMap(null);
     };
   }, [props.showInfo]);
 
   return container.current
     ? ReactDoM.createPortal(
-        <Messege>
+        <Messege
+          onClick={() => {
+            infoWindow.setMap(null);
+          }}
+        >
           <Title>{props.place.title}</Title>
           <Address>{props.place.address}</Address>
         </Messege>,
