@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
+import { useMap } from "../hooks/useMap";
 
 interface PlaceType {
   id: string;
@@ -9,6 +10,7 @@ interface PlaceType {
 }
 
 export default function SearchLocation() {
+  const map = useMap();
   const [keyword, setKeyword] = useState("");
   const [places, setPlaces] = useState<PlaceType[]>([]);
 
@@ -62,6 +64,11 @@ export default function SearchLocation() {
     searchPlaces(keyword);
   }
 
+  function handleItemClick(place: PlaceType) {
+    map.setCenter(place.position);
+    map.setLevel(4);
+  }
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -75,7 +82,7 @@ export default function SearchLocation() {
       <List>
         {places.map((item, index) => {
           return (
-            <Item key={item.id}>
+            <Item key={item.id} onClick={handleItemClick(item)}>
               <label>{`${index + 1}. ${item.title}`}</label>
               <span>{item.address}</span>
             </Item>
@@ -101,7 +108,7 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 1);
   width: 100%;
   min-width: 200px;
   padding: 8px;
