@@ -22,7 +22,7 @@
 
     <script>
       function reducer(state, action) {
-        console.log(state, action);
+        console.log(action.type, action, state, { color: action.color });
         if (state === undefined) {
           return { color: "yellow" };
         }
@@ -34,7 +34,11 @@
         return newState;
       }
 
-      const store = Redux.createStore(reducer);
+      const store = Redux.createStore(
+        reducer,
+        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          window.__REDUX_DEVTOOLS_EXTENSION__()
+      );
 
       function red() {
         const state = store.getState();
