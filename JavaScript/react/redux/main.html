@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.js"
+      integrity="sha512-8clKd0Zb9EeWqWE0gzlNxwWIjzYlYZ9cAsGcGM7gPsE+SKUxY6zZmLhrWqHMYQqbNCSwy21bn/TtA4zTQ+edag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
   <body>
     <div id="subject"></div>
     <div id="toc"></div>
@@ -17,11 +25,22 @@
       }
 
       function TOC() {
+        const state = store.getState();
+        let liTags = "";
+
+        for (let i = 0; i < state.contents.length; i++) {
+          liTags =
+            liTags +
+            `
+            <li>
+              <a href="${state.contents[i].id}">${state.contents[i].title}</a>
+            </li>`;
+        }
+
         document.querySelector("#toc").innerHTML = `
           <nav>
             <ol>
-              <li><a href="1.html">HTML</a></li>
-              <li><a href="2.html">CSS</a></li>
+              ${liTags}
             </ol>
           </nav>
           `;
@@ -44,6 +63,27 @@
         </article>
         `;
       }
+
+      function reducer(state, action) {
+        if (state === undefined) {
+          return {
+            contents: [
+              {
+                id: 1,
+                title: "HTML",
+                desc: "HTML is ...",
+              },
+              {
+                id: 2,
+                title: "CSS",
+                desc: "CSS is ...",
+              },
+            ],
+          };
+        }
+      }
+
+      const store = Redux.createStore(reducer);
 
       subject();
       TOC();
